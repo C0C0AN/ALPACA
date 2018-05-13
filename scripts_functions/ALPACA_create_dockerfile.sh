@@ -1,5 +1,3 @@
-
-
 # Generate Dockerfile.
 docker run --rm kaczmarj/neurodocker:master generate \
 -b neurodebian:stretch-non-free -p apt \
@@ -20,7 +18,6 @@ docker run --rm kaczmarj/neurodocker:master generate \
 
 # Build Docker image using the saved Dockerfile.
 docker build -t alpaca -f Dockerfile .
-
 
 
 
