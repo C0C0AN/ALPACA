@@ -215,7 +215,7 @@ while clock.getTime() < total_time:
                 interruption = True
             if keys[0] in RESPONSE_BUTTONS:
                 print('Button press registered : {0:.3f}'.format(
-                    clock.getTime()))
+                      clock.getTime()))
 
         # break out nested loops
         if interruption:
@@ -236,6 +236,7 @@ print('Completed in: %f' % clock.getTime())
 
 
 # Output ----------------------------------------------------------------------
+# TODO: Change the output format to something else, pickles are bad.
 output = {'Run_Number': IDX_RUN,
           'blocks': blocks,
           'block_durations': block_durations,
@@ -245,7 +246,7 @@ output = {'Run_Number': IDX_RUN,
 
 out_file_name = '{}-{}.pickle'.format(SESSION_ID, DATE)
 misc.toFile(os.path.join(PATH_OUTPUT, out_file_name), output)
-print('{:~^80}'.format(' Finished '))
 
+print('{:~^80}'.format(' Finished '))
 win.close()
 core.quit()

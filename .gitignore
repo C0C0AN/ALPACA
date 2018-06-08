@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# For not uploading the sound files mistakenly
+*.wav
+
+# Ignoring the test outputs (we can remove this once the work is done)
+TEST*.pickle
