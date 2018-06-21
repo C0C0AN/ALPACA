@@ -16,72 +16,51 @@ TODO: Add references for the randomization scheme here.
 import numpy as np
 
 # =============================================================================
-# User inputs
-NR_CATEG = 7  # Number of categories
-NR_SOUND_CATEG = 24  # Number of sounds per category
-NR_SOUND_CATEG_PER_RUN = 6  # Number of sounds per category per run
+# User input
+
+NR_CATEG = 6  # Total number of categories
+NR_SOUND_PER_CATEG = 48  # Number of sounds per category
+NR_RUN = 8  # Number of runs to present full set of sounds once
 
 # =============================================================================
-# Parameters
+# Derived parameters
 
 # Total number of sounds
-nr_sound = NR_CATEG*NR_SOUND_CATEG
-# Number of sounds per run
-nr_sound_per_run = NR_CATEG * NR_SOUND_CATEG_PER_RUN
-# Number of runs to complete a full set
-nr_run = nr_sound/nr_sound_per_run
+NR_SOUND = NR_CATEG * NR_SOUND_PER_CATEG
+if NR_SOUND % NR_RUN != 0:  # TODO: Swap with try/except?
+    print('Number of runs cant divide total nr. sounds!')
 # Number of sounds per categtory per run
-nr_sound_per_categ_per_run = NR_SOUND_CATEG / NR_SOUND_CATEG_PER_RUN
+NR_SOUND_PER_CATEG_PER_RUN = NR_SOUND_PER_CATEG / NR_RUN
+# Number of sounds per run
+NR_SOUND_PER_RUN = NR_CATEG * NR_SOUND_PER_CATEG_PER_RUN
 
 # =============================================================================
-# Generate protocol
-temp1 = []
-temp2 = [[], [], [], []]
+# Generate stimulus presentation order
 
-# Generate ordered arrays
-for i in range(0, nr_sound_per_categ_per_run):
-    blocks = []
-    for j in range(0, NR_CATEG):
-        # NOTE: Assumes 0 is dedicated for silent stimulus.
-        for k in range(1, NR_SOUND_CATEG_PER_RUN + 1):
-            x = k + NR_SOUND_CATEG * j + NR_SOUND_CATEG_PER_RUN * i
-            blocks = np.append(blocks, [x])
-    temp1.append(blocks.astype(int))
+# Create ordered list of integers representing different sounds
+temp1 = np.arange(NR_SOUND)
+# Add 1 because 0 will represent silence (NOTE: Might change slience to -1)
+temp1 += 1
+# Arange rows for sound indices, columns for category indices
+temp1 = temp1.reshape(NR_CATEG, NR_SOUND_PER_CATEG)
+# Randomize sound order within category
+temp2 = np.copy(temp1)
+for i in range(NR_CATEG):
+    temp2[i, :] = np.random.permutation(temp1[i, :])
+# Divide into runs (run x category x sound index)
+temp2 = temp2.reshape(NR_CATEG, NR_RUN, NR_SOUND_PER_CATEG_PER_RUN)
+temp2 = np.transpose(temp2, [1, 0, 2])
+temp2 = temp2.reshape(NR_RUN, NR_SOUND_PER_RUN)
 
 # Randomize ordered arrays
-print('-'*79)
-for i in range(0, nr_run):
-    i_array = temp1[i]
+for i in range(NR_RUN):
+    temp2[i, :] = np.random.permutation(temp2[i, :])
 
-    print('SUBSET:{}\n\nOrdered:\n{}'.format(i+1, i_array))
-
-    idx = np.arange(1, nr_sound_per_run + 1)  # index
-    newArr, prevRndList = [], []
-    prevRnd = -1  # just initialize
-    iterCount = 0  # Count iterations for report at the end.
-
-    # NOTE: I don't see what/why is happening here, need to comment better.
-    while True:
-        # Random number
-        rnd_0 = np.floor((np.random.random_sample(1) * nr_sound_per_run))
-        rnd = np.floor(rnd_0 / NR_SOUND_CATEG_PER_RUN)
-
-        if rnd != prevRnd:
-            if rnd_0 not in prevRndList:
-                # Correct occurence, append to list
-                newArr = np.append(newArr, i_array[int(rnd_0)])
-                # Note down the used index
-                prevRndList = np.append(prevRndList, rnd_0)
-
-                if newArr.size == i_array.size:  # When enough entries reached
-                    break
-
-        prevRnd = np.copy(rnd)
-        iterCount += 1
-
-    newArr = newArr.astype(int)
-
-    print('\nRandomized:\n{}\n\nIteration count:{}'.format(newArr, iterCount))
+# Print before after
+for i in range(NR_RUN):
+    print('SUBSET:{}\n'.format(i))
+    print('Before (ordered):\n{}\n'.format(np.sort(temp2[i, :])))
+    print('After (permuted):\n{}\n'.format(temp2[i, :]))
     print('-'*79)
 
 # =============================================================================
