@@ -108,3 +108,4 @@ venv.bak/
 
 # Ignoring the test outputs (we can remove this once the work is done)
 TEST*.pickle
+*TEST*.tsv

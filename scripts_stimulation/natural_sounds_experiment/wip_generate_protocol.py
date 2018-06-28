@@ -13,6 +13,8 @@ TODO: Add references for the randomization scheme here.
 
 """
 
+import os
+import time
 import numpy as np
 
 # =============================================================================
@@ -21,6 +23,7 @@ import numpy as np
 NR_CATEG = 6  # Total number of categories
 NR_SOUND_PER_CATEG = 48  # Number of sounds per category
 NR_RUN = 8  # Number of runs to present full set of sounds once
+OUT_DIR = '/home/faruk/Git/alpaca/scripts_stimulation/natural_sounds_experiment/protocols'
 
 # =============================================================================
 # Derived parameters
@@ -67,4 +70,15 @@ for i in range(NR_RUN):
 # Insert rests
 
 # =============================================================================
-# Export protocol
+# Export run protocols
+date = time.strftime("%Y_%m_%d_%H_%M", time.localtime())
+out_name = 'protocol_TEST_{}'.format(date)
+out_path = os.path.join(OUT_DIR, out_name)
+
+for i in range(NR_RUN):
+    out_run = '{}_run{}.tsv'.format(out_path, i+1)
+    file = open(out_run, 'w')
+    file.write('onset\tduration\ttrial_type\tidentifier\n')
+    for j in range(NR_SOUND_PER_RUN):
+        file.write('{}\t{}\t{}\t{}\n'.format('N/A', 'N/A', 'N/A', temp2[i, j]))
+    file.close()
