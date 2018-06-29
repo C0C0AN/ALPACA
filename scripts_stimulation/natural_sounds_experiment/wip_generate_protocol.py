@@ -13,7 +13,9 @@ TODO: Add references for the randomization scheme here.
 
 """
 
+from __future__ import division
 import os
+import csv
 import time
 import numpy as np
 
@@ -42,7 +44,7 @@ NR_SOUND = NR_CATEG * NR_SOUND_PER_CATEG
 if NR_SOUND % NR_RUN != 0:  # TODO: Swap with try/except?
     print('Number of runs cant divide total nr. sounds!')
 # Number of sounds per categtory per run
-NR_SOUND_PER_CATEG_PER_RUN = NR_SOUND_PER_CATEG / NR_RUN
+NR_SOUND_PER_CATEG_PER_RUN = NR_SOUND_PER_CATEG // NR_RUN
 # Number of sounds per run
 NR_SOUND_PER_RUN = NR_CATEG * NR_SOUND_PER_CATEG_PER_RUN
 
@@ -85,6 +87,7 @@ stim = stim.astype(int)
 
 # =============================================================================
 # Insert attention task trials
+# TODO
 
 # =============================================================================
 # Insert durations
@@ -110,8 +113,8 @@ stim_id[stim_id == str(ID_REST)] = 'rest'
 for i in range(NR_RUN):
     out_run = '{}_run{}.tsv'.format(out_path, i+1)
     file = open(out_run, 'w')
-    file.write('onset\tduration\ttrial_type\tidentifier\n')
+    writer = csv.writer(file, delimiter='\t')
+    writer.writerow(['onset', 'duration', 'trial_type', 'identifier'])
     for j in range(stim.shape[1]):
-        file.write('{}\t{}\t{}\t{}\n'.format(
-            onset[i, j], dur[i, j], stim_id[i, j], stim[i, j]))
+        writer.writerow([onset[i, j], dur[i, j], stim_id[i, j], stim[i, j]])
     file.close()
