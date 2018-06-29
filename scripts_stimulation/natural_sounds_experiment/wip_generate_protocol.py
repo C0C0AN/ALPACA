@@ -107,8 +107,13 @@ out_path = os.path.join(OUT_DIR, out_name)
 
 # Literal identifiers
 stim_id = stim.astype(str)
-stim_id[stim_id == str(ID_OFFSET)] = 'offset'
 stim_id[stim_id == str(ID_REST)] = 'rest'
+stim_id[stim_id == str(ID_OFFSET)] = 'offset'
+
+# TODO: Put stimulus file names here
+temp_id1 = stim_id != 'rest'
+temp_id2 = stim_id != 'offset'
+stim_id[temp_id1 * temp_id2] = 'placeholder.wav'
 
 for i in range(NR_RUN):
     out_run = '{}_run{}.tsv'.format(out_path, i+1)
