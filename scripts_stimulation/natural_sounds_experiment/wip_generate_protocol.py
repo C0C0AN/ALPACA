@@ -25,6 +25,15 @@ NR_SOUND_PER_CATEG = 48  # Number of sounds per category
 NR_RUN = 8  # Number of runs to present full set of sounds once
 OUT_DIR = '/home/faruk/Git/alpaca/scripts_stimulation/natural_sounds_experiment/protocols'
 
+# Enter durations in units of measurements
+DUR_STIM = 1
+DUR_OFFSET = 5
+DUR_REST = 2
+
+# Identifiers for experiment states
+ID_REST = 0
+ID_OFFSET = -1
+
 # =============================================================================
 # Derived parameters
 
@@ -42,7 +51,7 @@ NR_SOUND_PER_RUN = NR_CATEG * NR_SOUND_PER_CATEG_PER_RUN
 
 # Create ordered list of integers representing different sounds
 temp1 = np.arange(NR_SOUND)
-# Add 1 because 0 will represent silence (NOTE: Might change slience to -1)
+# Add 1 because 0 will represent silence (NOTE: Might bind to user input)
 temp1 += 1
 # Arange rows for sound indices, columns for category indices
 temp1 = temp1.reshape(NR_CATEG, NR_SOUND_PER_CATEG)
@@ -59,15 +68,33 @@ temp2 = temp2.reshape(NR_RUN, NR_SOUND_PER_RUN)
 for i in range(NR_RUN):
     temp2[i, :] = np.random.permutation(temp2[i, :])
 
-# Print before after
-for i in range(NR_RUN):
-    print('SUBSET:{}\n'.format(i))
-    print('Before (ordered):\n{}\n'.format(np.sort(temp2[i, :])))
-    print('After (permuted):\n{}\n'.format(temp2[i, :]))
-    print('-'*79)
+# # Print before after
+# for i in range(NR_RUN):
+#     print('SUBSET:{}\n'.format(i))
+#     print('Before (ordered):\n{}\n'.format(np.sort(temp2[i, :])))
+#     print('After (permuted):\n{}\n'.format(temp2[i, :]))
+#     print('-'*79)
+
+# Insert rests
+stim = np.ones([NR_RUN, NR_SOUND_PER_RUN*2]) * ID_REST
+stim[:, 1::2] = temp2
+
+# Insert offsets
+stim = np.insert(stim, [0, stim.shape[1]], ID_OFFSET, axis=1)
+stim = stim.astype(int)
 
 # =============================================================================
-# Insert rests
+# Insert attention task trials
+
+# =============================================================================
+# Insert durations
+# TODO: Add jitter to rests
+dur = np.zeros(stim.shape, dtype=int)
+dur[:, 2::2] = DUR_STIM
+dur[:, 1:-1:2] = DUR_REST
+dur[:, [0, -1]] = DUR_OFFSET
+
+onset = np.cumsum(dur, axis=1)
 
 # =============================================================================
 # Export run protocols
@@ -75,10 +102,16 @@ date = time.strftime("%Y_%m_%d_%H_%M", time.localtime())
 out_name = 'protocol_TEST_{}'.format(date)
 out_path = os.path.join(OUT_DIR, out_name)
 
+# Literal identifiers
+stim_id = stim.astype(str)
+stim_id[stim_id == str(ID_OFFSET)] = 'offset'
+stim_id[stim_id == str(ID_REST)] = 'rest'
+
 for i in range(NR_RUN):
     out_run = '{}_run{}.tsv'.format(out_path, i+1)
     file = open(out_run, 'w')
     file.write('onset\tduration\ttrial_type\tidentifier\n')
-    for j in range(NR_SOUND_PER_RUN):
-        file.write('{}\t{}\t{}\t{}\n'.format('N/A', 'N/A', 'N/A', temp2[i, j]))
+    for j in range(stim.shape[1]):
+        file.write('{}\t{}\t{}\t{}\n'.format(
+            onset[i, j], dur[i, j], stim_id[i, j], stim[i, j]))
     file.close()
