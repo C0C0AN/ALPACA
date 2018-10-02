@@ -16,8 +16,7 @@
 ALPACA is a toolbox (and hopefully soon BIDS app) for the localization and parcellation of human auditory cortex areas. In more detail, it includes an anatomical and a functional processing pipeline (implemented in [nipype](https://nipype.readthedocs.io/en/latest/)) that can be run alone or in combination. While the first just needs an anatomical image and takes advantage of [FreeSurfer](https://surfer.nmr.mgh.harvard.edu) and [ANTs](http://stnava.github.io/ANTs/), effectively mapping a user specified [list of auditory cortex regions](https://github.com/C0C0AN/ALPACA/tree/master/resources/regions_of_interest) from template to native space, the latter makes use of [different classic tonotopy experiments (that also come with the toolbox)](https://github.com/C0C0AN/ALPACA/tree/master/scripts_stimulation) and therefore requires functional data. Furthermore, it includes a [set of tutorials](https://github.com/C0C0AN/ALPACA/tree/master/resources/tutorials), ranging from data management and preparation over stimulus generation to ROI extraction. Beside being a hopefully helpful tool, ALPACA also intends to further increase standardization and reproducibility, by e.g., uploading anonymized results to an interactive online repository, allowing for large scale meta-analysis.          
 
 
-
-<img src="" alt="alpaca poster" width="800" height="250" border="100">
+<img src="resources/img/alpaca_poster_nh18.png" alt="alpaca poster">
 
 ## Documentation
 A documentation is currently in the works and will be available soon. Sorry for any inconvenience this might cause.   
