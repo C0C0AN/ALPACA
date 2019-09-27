@@ -84,8 +84,8 @@ print('Total number of measurements : {}'.format(np.sum(block_durations)))
 block_durations = block_durations * TR
 state_cumsum = np.cumsum(block_durations)
 total_time = state_cumsum[-1]
-print 'Total time                   : {} min {} sec'.format(
-    int(total_time // 60), int(total_time % 60))
+print('Total time                   : {} min {} sec'.format(
+    int(total_time // 60), int(total_time % 60)))
 if DEBUG:
     print('Debug mode active!')
 
