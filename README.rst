@@ -52,7 +52,7 @@ Running into any bugs :beetle:? Check out the `open issues <https://github.com/C
 
 How to contribute
 -----------------
-Thank you for considering contributing to our project! Before getting involved, please review our `Code of Conduct <https://github.com/C0C0AN/ALPACA/blob/master/CODE_OF_CONDUCT.md>_. Next, you can review  `open issues <https://github.com/C0C0AN/ALPACA/issues>`_ that we are looking for help with. If you submit a new pull request please be as detailed as possible in your comments. Please also have a look at our `contribution guidelines <https://github.com/C0C0AN/ALPACA/blob/master/CONTRIBUTING.md>`_.
+Thank you for considering contributing to our project! Before getting involved, please review our `Code of Conduct <https://github.com/C0C0AN/ALPACA/blob/master/CODE_OF_CONDUCT.md>`_. Next, you can review  `open issues <https://github.com/C0C0AN/ALPACA/issues>`_ that we are looking for help with. If you submit a new pull request please be as detailed as possible in your comments. Please also have a look at our `contribution guidelines <https://github.com/C0C0AN/ALPACA/blob/master/CONTRIBUTING.md>`_.
 
 Acknowledgements
 ----------------
