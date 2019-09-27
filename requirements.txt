@@ -1,0 +1,10 @@
+# List required packages in this file, one per line.
+numpy
+scipy
+scikit-learn
+pandas
+seaborn
+nipype
+mne
+nilearn
+pymvpa
