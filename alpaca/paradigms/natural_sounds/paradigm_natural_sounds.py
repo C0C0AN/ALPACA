@@ -92,7 +92,7 @@ if DEBUG:
 if os.path.isdir(PATH_OUTPUT):
     print('Output folder already exists.')
 else:
-    os.mkdir(PATH_OUTPUT, 0777)
+    os.mkdir(PATH_OUTPUT)
     print('Output folder is created.')
 
 print('='*80)
