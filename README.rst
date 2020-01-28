@@ -62,3 +62,11 @@ If you intend to or already used ALPACA, we would be very happy if you cite this
 Please feel free to contact me wrt any question or idea via mail (herholz dot peer at gmail dot com), twitter (`@peerherholz <https://twitter.com/peerherholz?lang=eng>`_), the brainhack slack team (@peerherholz) or the project channel (#alpaca). 
 
 The ALPACA project logo was made using an amazing freely available alpaca picture from `Max Pixel <http://maxpixel.freegreatpicture.com/Pako-Mammal-Wool-Vicugna-Pacos-Alpaca-Wool-Alpaca-814953>`_ and (cytoarchitectonic) auditory cortex ROIs from `Morosan et al. <https://www.ncbi.nlm.nih.gov/pubmed/11305897>`_ overlaid on the right hemisphere of `FreeSurfer's fsaverage brain <https://surfer.nmr.mgh.harvard.edu>`_. No alpacas were harmed during the creation of this logo. 
+
+Support
+=======
+This work was supported in part by funding provided by `Brain Canada <https://braincanada.ca/>`_, in partnership with `Health Canada <https://www.canada.ca/en/health-canada.html>`_, for the `Canadian Open Neuroscience Platform initiative <https://conp.ca/>`_.
+
+.. image:: https://conp.ca/wp-content/uploads/elementor/thumbs/logo-2-o5e91uhlc138896v1b03o2dg8nwvxyv3pssdrkjv5a.png
+    :alt: logo_conp
+    :target: https://conp.ca/
