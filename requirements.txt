@@ -7,3 +7,6 @@ seaborn
 nipype
 mne
 nilearn
+nibabel
+dipy
+popeye
