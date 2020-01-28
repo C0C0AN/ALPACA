@@ -10,4 +10,6 @@ Maintainer
 Contributors
 ------------
 
-None yet. Why not be the first? See: CONTRIBUTING.rst
+* Michael Ernst
+* Omer Faruk Gulban 
+* Michael Notter
