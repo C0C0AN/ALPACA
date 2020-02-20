@@ -66,15 +66,15 @@ generate_singularity() {
              --base neurodebian:stretch-non-free \
              --pkg-manager apt \
              --run-bash 'apt-get update' \
-             --install git num-utils gcc g++ curl build-essential\
+             --install git nano num-utils gcc g++ curl build-essential graphviz gcc g++ tree git-annex-standalone\
              --user=alpaca \
              --miniconda \
-                conda_install="python=3.7 notebook ipython seaborn pandas matplotlib" \
-                pip_install='ipywidgets ipyevents jupytext nilearn nistats nibabel' \
+                conda_install="python=3.7 notebook ipython numpy pandas traits jupyter jupyterlab matplotlib scikit-image scikit-learn seaborn vtk" \
+                pip_install='ipywidgets ipyevents jupytext nilearn nistats nibabel jupytext nipype nipy rdflib mne mayavi nilearn datalad ipywidgets pythreejs nibabel pymvpa2 PySurfer pybids pygraphviz' \
                 create_env='alpaca' \
                 activate=true \
              --run 'mkdir -p ~/.jupyter && echo c.NotebookApp.ip = \"0.0.0.0\" > ~/.jupyter/jupyter_notebook_config.py' \
-             --entrypoint="/neurodocker/startup.sh" 
+             --entrypoint="/neurodocker/startup.sh"
 }
 
 # generate files
