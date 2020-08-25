@@ -16,7 +16,7 @@ ALPACA
     :alt: Contributors
     :target: https://GitHub.com/C0C0AN/ALPACA/graphs/contributors/
 
-.. image:: https://github-basic-badges.herokuapp.com/commits/C0C0AN/ALPACA.svg
+.. image:: https://img.shields.io/github/commit-activity/m/C0C0AN/ALPACA?style=plastic
     :alt: Commits
     :target: https://github.com/C0C0AN/ALPACA/commits/master
 
