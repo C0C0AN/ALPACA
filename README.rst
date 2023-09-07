@@ -1,6 +1,6 @@
-===============================
-ALPACA
-===============================
+=======================================================================
+ALPACA - Automated Localization & Parcellation of Auditory Cortex Areas
+=======================================================================
 
 .. image:: https://img.shields.io/travis/C0C0AN/ALPACA.svg
         :target: https://travis-ci.org/C0C0AN/ALPACA
